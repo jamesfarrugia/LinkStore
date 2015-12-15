@@ -1,0 +1,33 @@
+*{
+    border-radius: 1px !important;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.top-jumbo .container .well
+{
+    margin-top: 50px;
+}
+
+.service-list
+{
+    list-style: none;
+}
+
+.service-list li
+{
+    padding: 5px;
+    font-size: 12px;
+}
+
+.answer
+{
+    font-size: 14px !important;
+}
+
+.copyright
+{
+    font-size: 12px;
+    margin-bottom: 50px;
+}
