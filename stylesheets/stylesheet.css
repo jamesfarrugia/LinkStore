@@ -69,8 +69,8 @@ header {
 }
 
 header h1 {
-  font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, serif;
-  font-size: 48px; font-weight: 900;
+  font-family: 'Open Sans', 'Chivo', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-size: 72px; font-weight: 100;
   line-height: 1.2;
   color: #303030;
   letter-spacing: -1px;
@@ -124,12 +124,12 @@ a.button {
   border-right: solid 1px #b7b7b7;
   border-bottom: solid 1px #b3b3b3;
   border-left: solid 1px #b7b7b7;
-  border-radius: 30px;
+  border-radius: 2px;
   -webkit-box-shadow: 10px 10px 5px #888;
   -moz-box-shadow: 10px 10px 5px #888;
   box-shadow: 0px 1px 5px #e8e8e8;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
 }
 a.button:hover {
   background: #fafafa; /* Old browsers */
