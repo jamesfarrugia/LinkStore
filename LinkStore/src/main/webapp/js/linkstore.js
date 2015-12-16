@@ -10,10 +10,8 @@ var Comment = React.createClass(
 	{
 		return (
 				<div className="comment">
-				<h2 className="commentAuthor">
-				{this.props.author}
-				</h2>
-				<span dangerouslySetInnerHTML={this.rawMarkup()} />
+					<a href={this.props.url}>{this.props.url}</a><br/>
+					<span dangerouslySetInnerHTML={this.rawMarkup()} />
 				</div>
 		);
 	}
@@ -74,9 +72,8 @@ var CommentBox = React.createClass(
 	{
 		return (
 				<div className="commentBox">
-				<h1>Comments</h1>
-				<CommentList data={this.state.data} />
-				<CommentForm onCommentSubmit={this.handleCommentSubmit} />
+					<CommentList data={this.state.data} />
+					<CommentForm onCommentSubmit={this.handleCommentSubmit} />
 				</div>
 		);
 	}
@@ -88,8 +85,8 @@ var CommentList = React.createClass(
 	{
 		var commentNodes = this.props.data.map(function(comment) {
 			return (
-					<Comment>
-					{comment}
+					<Comment key={comment.added} url={comment.url}>
+					{comment.description}
 					</Comment>
 			);
 		});

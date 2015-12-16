@@ -12,11 +12,11 @@
 		</layout>
 	</appender>
 
-	<logger name="org.springframework" level="debug" additivity="false">
+	<logger name="org.springframework" level="warn" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-	<logger name="com.jf.java.web" level="info" additivity="false">
+	<logger name="com.jf.java.web" level="warn" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
