@@ -31,3 +31,18 @@
     font-size: 12px;
     margin-bottom: 50px;
 }
+
+.link
+{
+	padding-bottom: 24px;
+}
+
+.link-title
+{
+	font-size: 18px;
+}
+
+.link-url
+{
+	color: #343434;
+}
