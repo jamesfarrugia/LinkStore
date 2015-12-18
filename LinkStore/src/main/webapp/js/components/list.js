@@ -68,10 +68,26 @@ window.Link = React.createClass(
 
 	render: function()
 	{
+		var date = new Date(this.props.link.added);
+		var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
+					"Sep", "Oct", "Nov", "Dec"];
+		
 		return (
 				<div className="link">
-					<a className="link-title" href={this.props.link.url}>{this.props.link.title}</a><br/>
-					<small className="link-url">{this.props.link.url}</small><br/>
+					<a className="link-title" 
+						href={this.props.link.url}>
+						{this.props.link.title}
+					</a>
+					<br/>
+					<small className="link-url">
+						{this.props.link.url}
+						&nbsp;|&nbsp;Added&nbsp;
+						<span>
+							{date.getDate()}&nbsp;
+							{months[date.getMonth()]},&nbsp;
+							{date.getFullYear()}
+						</span>
+					</small>
 					<span dangerouslySetInnerHTML={this.rawMarkup()} />
 				</div>
 		);
