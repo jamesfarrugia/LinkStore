@@ -35,12 +35,6 @@ public class LinkService
 	public void init()
 	{
 		links = new ArrayList<Link>();
-		Link l = new Link();
-		l.setUrl("google.com");
-		l.setDescription("The engine");
-		l.setTitle("Google");
-		l.setAdded(System.currentTimeMillis());
-		links.add(l);
 	}
 	
 	/**
