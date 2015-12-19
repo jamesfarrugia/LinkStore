@@ -2,14 +2,28 @@ window.LinkBox = React.createClass(
 {
 	loadLinksFromServer: function()
 	{
+		if (window.store.searching)
+		{
+			this.setState({data: []});
+			return;
+		}
+		
 		$.ajax({
 			url: this.props.url,
+			data: {max: 5},
 			dataType: 'json',
 			cache: false,
 			success: function(data) 
 			{
+				if (window.store.searching)
+				{
+					this.setState({data: []});
+					return;
+				}
+				
 				this.setState({data: data});
 			}.bind(this),
+			
 			error: function(xhr, status, err)
 			{
 				console.error(this.props.url, status, err.toString());
@@ -25,6 +39,8 @@ window.LinkBox = React.createClass(
 	componentDidMount: function() 
 	{
 		this.loadLinksFromServer();
+		// Done only when not searching.  We'll put some flag, but we should get
+		// some flux going.
 		setInterval(this.loadLinksFromServer, this.props.pollInterval);
 	},
 	

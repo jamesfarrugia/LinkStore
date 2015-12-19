@@ -54,12 +54,19 @@ public class LinkDao
 	}
 	
 	/**
-	 * Selects all the links in the database
+	 * Selects all the links in the database, ordered by date, most recent first
+	 * and limited by the maximum parameter, if specified.
+	 * 
+	 * @param maximum optional maximum number of rows
 	 * @return a list of all the links in the database
 	 */
-	public List<Link> listLinks()
+	public List<Link> listLinks(Integer maximum)
 	{
-		Result<Record> result = context.fetch("SELECT * FROM LINKS");
+		String query = "SELECT * FROM LINKS ORDER BY added DESC";
+		if (maximum != null)
+			query += " LIMIT " + maximum;
+		
+		Result<Record> result = context.fetch(query);
 		
 		return recordsToLinks(result);
 	}

@@ -47,13 +47,15 @@ public class LinkService
 	}
 	
 	/**
-	 * Returns a list of links from the DAO
+	 * Returns a list of links from the DAO.  By default these are sorted by
+	 * date added, most recent first
 	 * 
+	 * @param maximum optional maximum number of links to return
 	 * @return an list of links.
 	 */
-	public List<Link> getLinks()
+	public List<Link> getLinks(Integer maximum)
 	{
-		return this.dao.listLinks();
+		return this.dao.listLinks(maximum);
 	}
 	
 	/**

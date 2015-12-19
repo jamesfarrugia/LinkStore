@@ -30,7 +30,7 @@ window.SearchPanel = React.createClass(
 	{
 		return (
 				<div className="search-panel">
-					<SearchBox/>
+					<SearchBox pollInterval={2000}/>
 					<hr/>
 				</div>
 		);
@@ -42,13 +42,48 @@ window.SearchPanel = React.createClass(
  */
 window.SearchBox = React.createClass(
 {
+	handleSearchTerm: function(event)
+	{
+		var state = {};
+		state.term = event.target.value;
+		
+		/* set a flag to reload during the next loop */
+		if (!this.state.term || this.state.term != state.term)
+			this.setState({ripe: true});
+		
+		this.setState(state);
+	},
+	
+	testSearch : function()
+	{
+		if (this.state.ripe)
+		{
+			console.log("ripe for " + this.state.term);
+			this.setState({ripe: false});
+		}
+		
+		window.store.searching = this.state.term && this.state.term != "";
+		
+	},
+	
+	getInitialState: function()
+	{
+		return {};
+	},
+	
+	componentDidMount: function() 
+	{
+		setInterval(this.testSearch, this.props.pollInterval);
+	},
+	
 	render: function()
 	{
 		return (
 				<input 
 					type="text"
 					placeholder="Type to search..."
-					className="form-control">
+					className="form-control"
+					onChange={this.handleSearchTerm}>
 				</input>
 		);
 	}

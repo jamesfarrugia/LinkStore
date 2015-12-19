@@ -2,6 +2,8 @@
 
 $(function()
 {
+	window.store = {};
+	
 	var linkForm = [
 		{name:"url", type:"text", title:"URL"},
 		{name:"title", type:"text", title:"Title"},

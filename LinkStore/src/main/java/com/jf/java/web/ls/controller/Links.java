@@ -29,18 +29,21 @@ public class Links
 	
 	/**
 	 * Returns a list of links to the view resolver.
+	 * 
+	 * @param max optional maximum number of links to return
 	 * @return a list of {@link Link} objects.
 	 */
 	@RequestMapping(value = "links", method = RequestMethod.GET)
-	public @ResponseBody List<Link> list() 
+	public @ResponseBody List<Link> list(
+			@RequestParam(name = "max", required = false) Integer max) 
 	{
-		return service.getLinks();
+		return service.getLinks(max);
 	}
 	
 	/**
 	 * Searches through the links and returns a list of matching ones.
-	 * @param term the term to search
 	 * 
+	 * @param term the term to search
 	 * @return a list of {@link Link} objects.
 	 * @throws IOException in case the index cannot be accessed
 	 * @throws ParseException in case the query fails
@@ -55,6 +58,7 @@ public class Links
 	
 	/**
 	 * Creates a new link and passes it to the service for it to persist.
+	 * 
 	 * @param url URL of the link
 	 * @param title title if assigned from the client
 	 * @param description description if assigned by the client
