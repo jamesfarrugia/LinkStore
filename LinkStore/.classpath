@@ -171,4 +171,19 @@
       <attribute value="jar:file:/home/james/.m2/repository/org/apache/lucene/lucene-analyzers-common/5.3.1/lucene-analyzers-common-5.3.1-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/lucene/lucene-queryparser/5.3.1/lucene-queryparser-5.3.1.jar" sourcepath="M2_REPO/org/apache/lucene/lucene-queryparser/5.3.1/lucene-queryparser-5.3.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/home/james/.m2/repository/org/apache/lucene/lucene-queryparser/5.3.1/lucene-queryparser-5.3.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/lucene/lucene-queries/5.3.1/lucene-queries-5.3.1.jar" sourcepath="M2_REPO/org/apache/lucene/lucene-queries/5.3.1/lucene-queries-5.3.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/home/james/.m2/repository/org/apache/lucene/lucene-queries/5.3.1/lucene-queries-5.3.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/lucene/lucene-sandbox/5.3.1/lucene-sandbox-5.3.1.jar" sourcepath="M2_REPO/org/apache/lucene/lucene-sandbox/5.3.1/lucene-sandbox-5.3.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/home/james/.m2/repository/org/apache/lucene/lucene-sandbox/5.3.1/lucene-sandbox-5.3.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
 </classpath>

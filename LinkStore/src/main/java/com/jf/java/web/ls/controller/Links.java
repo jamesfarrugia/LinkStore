@@ -1,7 +1,9 @@
 package com.jf.java.web.ls.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +35,22 @@ public class Links
 	public @ResponseBody List<Link> list() 
 	{
 		return service.getLinks();
+	}
+	
+	/**
+	 * Searches through the links and returns a list of matching ones.
+	 * @param term the term to search
+	 * 
+	 * @return a list of {@link Link} objects.
+	 * @throws IOException in case the index cannot be accessed
+	 * @throws ParseException in case the query fails
+	 */
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public @ResponseBody List<Link> search(
+			@RequestParam(name = "term") String term)
+	throws ParseException, IOException 
+	{
+		return service.searchLinks(term);
 	}
 	
 	/**
