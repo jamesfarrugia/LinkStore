@@ -16,6 +16,9 @@ public class LinkDao
 {
 	@Autowired private DSLContext context;
 	
+	/**
+	 * TODO remove
+	 */
 	public void test()
 	{
 		context.query("SELECT * FROM LINKS").execute();
