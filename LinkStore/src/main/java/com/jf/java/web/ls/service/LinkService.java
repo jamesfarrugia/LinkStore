@@ -28,6 +28,14 @@ public class LinkService
 	 */
 	public void addLink(Link link)
 	{
+		link.setAdded(System.currentTimeMillis());
+		
+		if (link.getTitle() == null)
+			link.setTitle(link.getUrl());
+		
+		if (link.getDescription() == null)
+			link.setDescription("");
+		
 		this.dao.add(link);
 	}
 	

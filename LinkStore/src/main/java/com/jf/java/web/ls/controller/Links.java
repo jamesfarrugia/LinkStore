@@ -40,20 +40,22 @@ public class Links
 	 * @param url URL of the link
 	 * @param title title if assigned from the client
 	 * @param description description if assigned by the client
+	 * @return returns true (TODO Exception in failure)
 	 */
 	@RequestMapping(value = "links", method = RequestMethod.POST)
-	public @ResponseBody void add(
-			@RequestParam("url") String url,
-			@RequestParam("title") String title,
-			@RequestParam("description") String description) 
+	public @ResponseBody boolean add(
+			@RequestParam(name = "url") String url,
+			@RequestParam(name = "title", required = false) String title,
+			@RequestParam(name = "description", required = false) String description) 
 	{
 		Link link = new Link();
 		
 		link.setUrl(url);
 		link.setTitle(title);
 		link.setDescription(description);
-		link.setAdded(System.currentTimeMillis());
 		
 		service.addLink(link);
+		
+		return true;
 	}
 }

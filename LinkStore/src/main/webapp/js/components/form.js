@@ -38,6 +38,8 @@ window.FormPanel = React.createClass(
  */
 window.FormContent = React.createClass(
 {
+	formId: new Date().getTime(),
+	
 	handleChange: function(event)
 	{
 		var state = {};
@@ -48,6 +50,7 @@ window.FormContent = React.createClass(
 	handleSubmit: function(event)
 	{
 		event.preventDefault();
+		var self = this;
 		
 		$.ajax({
 			url:		this.props.url,
@@ -56,7 +59,8 @@ window.FormContent = React.createClass(
 			data:		this.state,
 			success:	function(data)
 			{
-				//this.setState({data: data});
+				self.replaceState({});
+				$("[data-form-id=" + self.formId + "]").val("");
 			}.bind(this),
 			error:		function(xhr, status, err)
 			{
@@ -77,7 +81,8 @@ window.FormContent = React.createClass(
 					<FormControl 
 						onChange={self.handleChange} 
 						key={control.name} 
-						control={control}/>
+						control={control}
+						formId={self.formId}/>
 			);
 		});
 
@@ -103,7 +108,8 @@ window.FormControl = React.createClass(
 					type={this.props.control.type} 
 					className="form-control" 
 					id={this.props.control.name}
-					placeholder={this.props.control.title} />
+					placeholder={this.props.control.title} 
+					data-form-id={this.props.formId} />
 			</div>
 		);
 	},
@@ -115,7 +121,8 @@ window.FormControl = React.createClass(
 						onChange={this.props.onChange}
 						className="form-control" 
 						id={this.props.control.name}
-						placeholder={this.props.control.title} ></textarea>
+						placeholder={this.props.control.title}
+						data-form-id={this.props.formId} ></textarea>
 				</div>
 			);
 	},
