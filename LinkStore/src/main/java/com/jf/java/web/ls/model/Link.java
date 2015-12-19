@@ -8,6 +8,8 @@ package com.jf.java.web.ls.model;
  */
 public class Link
 {
+	/** ID of the link */
+	private int id;
 	/** URL of the link */
 	private String url;
 	/** Title assigned to the link */
@@ -23,6 +25,24 @@ public class Link
 	public Link()
 	{
 	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId()
+	{
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
+
 
 	/**
 	 * @return the url
