@@ -46,3 +46,11 @@
 {
 	color: #343434;
 }
+
+.link-full-url
+{
+	display: inline-block;
+	max-width: 35%;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}

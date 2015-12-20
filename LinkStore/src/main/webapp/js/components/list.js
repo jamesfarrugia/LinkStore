@@ -96,7 +96,9 @@ window.Link = React.createClass(
 					</a>
 					<br/>
 					<small className="link-url">
-						{this.props.link.url}
+						<span className="link-full-url">
+							<nobr>{this.props.link.url}</nobr>
+						</span>
 						&nbsp;|&nbsp;Added&nbsp;
 						<span>
 							{date.getDate()}&nbsp;
