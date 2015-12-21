@@ -217,4 +217,8 @@
 	<scm>
 		<url>https://github.com/jamesfarrugia/LinkStore</url>
 	</scm>
+	<issueManagement>
+		<url>https://github.com/jamesfarrugia/LinkStore/issues</url>
+		<system>GitHub</system>
+	</issueManagement>
 </project>
