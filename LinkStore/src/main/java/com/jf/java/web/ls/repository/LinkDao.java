@@ -1,12 +1,16 @@
 package com.jf.java.web.ls.repository;
 
+import static org.jooq.impl.DSL.field;
+import static org.jooq.impl.DSL.table;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
+import org.jooq.SelectConditionStep;
+import org.jooq.SelectSeekStep1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,32 +29,39 @@ public class LinkDao
 	/** jOOQ DSL */
 	@Autowired private DSLContext context;
 	
+	/* Table definition is done here rather than via jOOQ generation since this
+	 * is magnitudes simpler than anything enterprise.*/
+	
+	/** Table name for containing the links */
+	private final String LINKS	=	"LINKS";
+	
+	/** Class for field names. */
+	private final class Fields
+	{
+		final static String ID		=	"id";
+		final static String URL		=	"url";
+		final static String ADDED	=	"added";
+		final static String TITLE	=	"title";
+		final static String DESC	=	"description";
+	}
+	
 	/**
 	 * Adds a new link to the database
 	 * @param link the link to add
 	 */
 	public synchronized void add(Link link)
 	{
-		StringBuffer buffer = new StringBuffer();
-		
-		int id = (Integer)context.selectCount().from("LINKS").
+		int id = (Integer)context.selectCount().from(LINKS).
 					fetchOne().getValue(0);
 		
 		link.setId(id);
 		
-		buffer.append("INSERT INTO LINKS VALUES(");
-		buffer.append(id);
-		buffer.append(",'");
-		buffer.append(link.getUrl().replaceAll("'", "''"));
-		buffer.append("',");
-		buffer.append(link.getAdded());
-		buffer.append(",'");
-		buffer.append(link.getTitle().replaceAll("'", "''"));
-		buffer.append("','");
-		buffer.append(link.getDescription().replaceAll("'", "''"));
-		buffer.append("');");
-		
-		context.execute(buffer.toString());
+		context.insertInto(table(LINKS),
+				field(Fields.ID), field(Fields.URL), field(Fields.ADDED), 
+				field(Fields.TITLE), field(Fields.DESC)).
+				values(
+				id, link.getUrl(), link.getAdded(), link.getTitle(), 
+				link.getDescription()).execute();
 	}
 	
 	/**
@@ -62,11 +73,16 @@ public class LinkDao
 	 */
 	public List<Link> listLinks(Integer maximum)
 	{
-		String query = "SELECT * FROM LINKS ORDER BY added DESC";
-		if (maximum != null)
-			query += " LIMIT " + maximum;
+		SelectSeekStep1<Record, Object> query = 
+				context.
+				select().
+				from(table(LINKS)).
+				orderBy(field(Fields.ADDED).desc());
 		
-		Result<Record> result = context.fetch(query);
+		if (maximum != null)
+			query.limit(maximum);
+		
+		Result<Record> result = query.fetch();
 		
 		return recordsToLinks(result);
 	}
@@ -79,12 +95,11 @@ public class LinkDao
 	 */
 	public Link getLink(int id)
 	{
-		StringBuffer query = new StringBuffer();
-		query.append("SELECT * FROM LINKS WHERE id=");
-		query.append(id);
-		query.append(";");
+		SelectConditionStep<Record> query = context.
+			selectFrom(table(LINKS)).
+			where(field(Fields.ID).eq(id));
 		
-		return recordToLink(context.fetchOne(query.toString()));
+		return recordToLink(query.fetchOne());
 	}
 	
 	/**
@@ -95,16 +110,11 @@ public class LinkDao
 	 */
 	public List<Link> getLinks(List<Integer> ids)
 	{
-		StringJoiner joiner = new StringJoiner(",");
-		for (Integer id : ids)
-			joiner.add(Integer.toString(id));
+		SelectConditionStep<Record> query = context.
+				selectFrom(table(LINKS)).
+				where(field(Fields.ID).in(ids));
 		
-		StringBuffer query = new StringBuffer();
-		query.append("SELECT * FROM LINKS WHERE id IN(");
-		query.append(joiner.toString());
-		query.append(");");
-		
-		Result<Record> result = context.fetch(query.toString());
+		Result<Record> result = query.fetch();
 		
 		return recordsToLinks(result);
 	}
@@ -138,11 +148,11 @@ public class LinkDao
 	{
 		Link link = new Link();
 		
-		link.setId((Integer)record.getValue("id"));
-		link.setUrl(record.getValue("url").toString());
-		link.setAdded((long)record.getValue("added"));
-		link.setTitle(record.getValue("title").toString());
-		link.setDescription(record.getValue("description").toString());
+		link.setId((Integer)record.getValue(Fields.ID));
+		link.setUrl(record.getValue(Fields.URL).toString());
+		link.setAdded((long)record.getValue(Fields.ADDED));
+		link.setTitle(record.getValue(Fields.TITLE).toString());
+		link.setDescription(record.getValue(Fields.DESC).toString());
 		
 		return link;
 	}
