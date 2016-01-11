@@ -30,7 +30,7 @@ window.SearchPanel = React.createClass(
 	{
 		return (
 				<div className="search-panel">
-					<SearchBox pollInterval={2000}/>
+					<SearchBox pollInterval={250}/>
 					<hr/>
 				</div>
 		);

@@ -151,8 +151,14 @@ public class LinkDao
 		link.setId((Integer)record.getValue(Fields.ID));
 		link.setUrl(record.getValue(Fields.URL).toString());
 		link.setAdded((long)record.getValue(Fields.ADDED));
-		link.setTitle(record.getValue(Fields.TITLE).toString());
-		link.setDescription(record.getValue(Fields.DESC).toString());
+		
+		Object field = record.getValue(Fields.TITLE);
+		if (field != null)
+			link.setTitle(field.toString());
+		
+		field = record.getValue(Fields.DESC);
+		if (field != null)
+			link.setDescription(field.toString());
 		
 		return link;
 	}

@@ -28,6 +28,10 @@
 		<bonecp.version>0.8.0.RELEASE</bonecp.version>
 		
 		<lucene.version>5.3.1</lucene.version>
+		
+		<commons.http.version>4.4</commons.http.version>
+		<commons.io.version>2.2</commons.io.version>
+		<jsoup.version>1.8.2</jsoup.version>
 	</properties>
 	
 	<dependencies>
@@ -190,6 +194,27 @@
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queryparser</artifactId>
 			<version>${lucene.version}</version>
+		</dependency>
+		
+		<!-- HTTP client -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${commons.http.version}</version>
+		</dependency>
+		
+		<!-- IO Utils -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+		
+		<!-- JSoup for processing HTML -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
 		</dependency>
 	</dependencies>
 	

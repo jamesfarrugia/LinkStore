@@ -78,7 +78,7 @@ window.Link = React.createClass(
 {
 	rawMarkup: function() 
 	{
-		var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+		var rawMarkup = marked(this.props.children?this.props.children.toString():"", {sanitize: true});
 		return { __html: rawMarkup };
 	},
 
